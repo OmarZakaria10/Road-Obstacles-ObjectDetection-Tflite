@@ -3,7 +3,7 @@ import re
 import cv2
 
 import numpy as np
-import tensorflow as tf
+from tflite_runtime.interpreter import Interpreter
 CAMERA_WIDTH = 640
 CAMERA_HEIGHT = 480
 
@@ -57,7 +57,7 @@ def detect_objects(interpreter, image, threshold):
 
 def main():
     labels = load_labels()
-    interpreter = tf.lite.Interpreter('detect.tflite')
+    interpreter =Interpreter('detect.tflite')
     interpreter.allocate_tensors()
     _, input_height, input_width, _ = interpreter.get_input_details()[0]['shape']
 
@@ -65,7 +65,7 @@ def main():
     while cap.isOpened():
         ret, frame = cap.read()
         img = cv2.resize(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB), (640,640))
-        res = detect_objects(interpreter, img, 0.38)
+        res = detect_objects(interpreter, img, 0.35)
         print(res)
 
         for result in res:
