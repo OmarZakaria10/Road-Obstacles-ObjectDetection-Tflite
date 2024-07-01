@@ -1,6 +1,18 @@
-# Computer Vision Model for Object Detection
+# Computer Vision Model for Object Detection for AROS 
 
-This project is designed to detect specific classes using a TensorFlow Lite model. The following instructions will guide you through setting up the project, including creating a virtual environment, installing dependencies, and running the model.
+ This project is designed to detect specific classes using a TensorFlow Lite model. 
+
+ Classes detected :
+- Obstacles
+- person
+- bicycle
+- car
+- motorcycle
+- bus
+- truck
+- accident
+
+
 
 ## Steps
 
