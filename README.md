@@ -1,30 +1,50 @@
-# Tensorflow Object Detection Walkthrough with Raspberry Pi
+# Computer Vision Model for Object Detection
+
+This project is designed to detect specific classes using a TensorFlow Lite model. The following instructions will guide you through setting up the project, including creating a virtual environment, installing dependencies, and running the model.
 
 ## Steps
-<br />
-<b>Step 1.</b> Walk through TFOD tutorial up to step 12 to generate TFLite files: https://github.com/nicknochnack/TFODCourse
-<br/><br/>
-<b>Step 2.</b> Clone the current repository onto your Raspberry Pi or copy it from a machine using RDP.
-<pre> git clone https://github.com/nicknochnack/TFODRPi</pre>
-<br/><br/>
-<b>Step 3.</b>Install the required dependencies onto your Raspberry Pi
-<pre>
-pip3 install opencv-python 
-sudo apt-get install libcblas-dev
-sudo apt-get install libhdf5-dev
-sudo apt-get install libhdf5-serial-dev
-sudo apt-get install libatlas-base-dev
-sudo apt-get install libjasper-dev 
-sudo apt-get install libqtgui4 
-sudo apt-get install libqt4-testv
+
+### Step 1: Generate TFLite Files
+Walk through the TFOD tutorial up to step 12 to generate TFLite files.
+
+### Step 2: Clone the Repository
+Clone the current repository onto your Raspberry Pi or copy it from a machine using RDP.
+```sh
+git clone https://github.com/OmarZakaria10/Road-Obstacles-ObjectDetection-Tflite.git
+```
+
+### Step 3: Set Up Virtual Environment
+Create and activate a virtual environment to manage project dependencies.
+
+On Unix or MacOS:
+
+```
+python3 -m venv venv
+source venv/bin/activate
+```
+On Windows:
+```
+python -m venv venv
+venv\Scripts\activate
+```
+
+###Step 4: Install Dependencies
+Install the required dependencies listed in the requirements.txt file
+
+```
+pip install -r requirements.txt
+```
+
+Additionally, install the following system dependencies on your Raspberry Pi:
+
+```
+sudo apt-get install libcblas-dev libhdf5-dev libhdf5-serial-dev libatlas-base-dev libjasper-dev libqtgui4 libqt4-test
 echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | sudo tee /etc/apt/sources.list.d/coral-edgetpu.list
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 sudo apt-get update
-sudo apt-get install python3-tflite-runtime
-</pre>
-<br/><br/>
-<b>Step 4.</b> Copy your detect.tflite model into the same repository and update the labels.txt file to represent your labels. 
-<br/><br/>
-<b>Step 5.</b> Run real time detections using the detect.py script
-<pre>python3 detect.py</pre>
-<br/><br/>
+```
+
+### Step 5: Run Real-Time Detections
+```
+python3 detect.py
+```
