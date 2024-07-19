@@ -64,7 +64,7 @@ parser.add_argument('--labels', help='Name of the labelmap file, if different th
 parser.add_argument('--threshold', help='Minimum confidence threshold for displaying detected objects',
                     default=0.3)
 parser.add_argument('--resolution', help='Desired webcam resolution in WxH. If the webcam does not support the resolution entered, errors may occur.',
-                    default='640x640')
+                    default='1280x720')
 parser.add_argument('--edgetpu', help='Use Coral Edge TPU Accelerator to speed up detection',
                     action='store_true')
 
@@ -121,7 +121,7 @@ interpreter.allocate_tensors()
 
 # Set up server socket
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind(('0.0.0.0', 8888))
+server_socket.bind(('0.0.0.0', 12345))
 server_socket.listen(1)
 print('Server listening on port 12345')
 client_socket, addr = server_socket.accept()
@@ -152,8 +152,11 @@ freq = cv2.getTickFrequency()
 # Initialize video stream
 videostream = VideoStream(resolution=(imW,imH),framerate=30).start()
 time.sleep(1)
-
+frame_counter = 0
+# if not os.path.exists('temp'):
+#     os.makedirs('temp')
 while True:
+
     # Start timer
     t1 = cv2.getTickCount()
 
@@ -178,7 +181,7 @@ while True:
     classes = interpreter.get_tensor(output_details[classes_idx]['index'])[0]
     scores = interpreter.get_tensor(output_details[scores_idx]['index'])[0]
 
-    detected_objects = []
+    detected_objects = [frame_counter]
     for i in range(len(scores)):
         if ((scores[i] > min_conf_threshold) and (scores[i] <= 1.0)):
             detected_objects.append({
@@ -201,8 +204,14 @@ while True:
             cv2.rectangle(frame, (xmin, label_ymin-labelSize[1]-10), (xmin+labelSize[0], label_ymin+baseLine-10), (255, 255, 255), cv2.FILLED)
             cv2.putText(frame, label, (xmin, label_ymin-7), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
 
+    cv2.imwrite(f'/home/Omar/Pictures/AROS/frame_{frame_counter}.jpg', frame)
+    frame_counter += 1
+    if  frame_counter==20 :  frame_counter=0
+
     # Send detected objects to client
-    client_socket.sendall(json.dumps(detected_objects).encode('utf-8'))
+    data = detected_objects
+    
+    client_socket.sendall(json.dumps(data).encode('utf-8'))
 
     # Draw framerate
     cv2.putText(frame,'FPS: {0:.2f}'.format(frame_rate_calc),(30,50),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,0),2,cv2.LINE_AA)
