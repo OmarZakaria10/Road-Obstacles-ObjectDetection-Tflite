@@ -66,5 +66,5 @@ sudo apt-get update
 
 ### Step 5: Run Real-Time Detections
 ```
-python3 detect.py
+python3 script.py
 ```
