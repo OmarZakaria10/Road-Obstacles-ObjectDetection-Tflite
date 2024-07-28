@@ -2,7 +2,7 @@
 
  This project is designed to detect specific classes using a TensorFlow Lite model. 
 
- Classes detected :
+ ## Classes detected 
 - Obstacles
 - person
 - bicycle
@@ -12,7 +12,10 @@
 - truck
 - accident
 
+## Metrics
+
 ![alt text](image-1.png)
+![alt text](image.png)
 
 
 
