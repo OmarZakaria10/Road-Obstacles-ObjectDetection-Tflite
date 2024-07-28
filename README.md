@@ -17,7 +17,9 @@
 ![alt text](image-1.png)
 ![alt text](image.png)
 
+## Sample of Real Time Detection
 
+[Watch the video![alt text](image-2.png)](https://drive.google.com/file/d/1eyrcY514wDC-7yBuJ6yC75GkH4GQ7QW3/view?usp=sharing)
 
 ## Steps
 
