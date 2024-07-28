@@ -1,6 +1,7 @@
 # Computer Vision Model for Object Detection for AROS 
 
- This project is designed to detect specific classes using a TensorFlow Lite model. 
+ This project is designed to detect specific classes using a TensorFlow Lite model (MobileNet V2 640x640). 
+ 
 
  ## Classes detected 
 - Obstacles
